@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\Image;
 
@@ -33,6 +34,10 @@ class ImageUploadController extends Controller
 
 		// Set current time as filename
 		$imageName = time().'.'.$request->image->extension();
+
+		// Create Image Folder if not exists
+		$path = public_path('/images');
+		File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
 
 		// Save image in storage folder
 		$imagePathWithFileName =  $request->image->storeAs('public/images', $imageName); 
