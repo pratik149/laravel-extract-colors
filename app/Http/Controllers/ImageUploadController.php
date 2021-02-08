@@ -19,8 +19,7 @@ class ImageUploadController extends Controller
     }
 
     /**
-     * Store a newly upload image in storage,
-	 * and extract colors from it.
+     * Store a newly upload image in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -38,7 +37,7 @@ class ImageUploadController extends Controller
 		// Save image in storage folder
 		$imagePathWithFileName =  $request->image->storeAs('public/images', $imageName); 
  
-		// Store image record in table
+		// Store image's record in table
         $image = new Image;
         $image->name = $imageName;
         $image->path = $imagePathWithFileName;
